@@ -11,6 +11,7 @@ Implements:
 
 import numpy as np
 from scipy import stats
+from scipy.signal.windows import gaussian
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -82,7 +83,7 @@ class ECGFeatureExtractor:
             qrs_amplitudes.append(amplitude)
             
             # QRS area (integral)
-            area = np.trapz(np.abs(qrs_segment))
+            area = np.trapezoid(np.abs(qrs_segment))
             qrs_areas.append(area)
         
         features = {
@@ -604,7 +605,7 @@ def demo_feature_extraction():
     for beat_time in np.arange(0.5, duration, 0.8):
         beat_idx = int(beat_time * fs)
         if beat_idx < len(ecg) - 100:
-            beat = signal.gaussian(100, 10)
+            beat = gaussian(100, 10)
             ecg[beat_idx:beat_idx+100] += beat
     
     # Simulate R-peaks

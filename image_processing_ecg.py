@@ -16,6 +16,7 @@ import cv2
 import pywt
 import matplotlib.pyplot as plt
 from scipy import ndimage
+from scipy.signal.windows import gaussian
 from skimage import filters, exposure, transform
 from skimage.feature import canny
 from skimage.transform import hough_line, hough_line_peaks
@@ -758,7 +759,7 @@ def demo_image_processing():
     for beat_time in np.arange(0.5, duration, 0.8):
         beat_idx = int(beat_time * fs)
         if beat_idx < len(ecg) - 100:
-            beat = signal.gaussian(100, 10)
+            beat = gaussian(100, 10)
             ecg[beat_idx:beat_idx+100] += beat
     
     # Create scalogram

@@ -12,6 +12,7 @@ Implements:
 import numpy as np
 from scipy import signal, interpolate
 from scipy.signal import butter, filtfilt, find_peaks
+from scipy.signal.windows import gaussian
 import matplotlib.pyplot as plt
 from typing import Tuple, List, Optional
 
@@ -483,7 +484,7 @@ def demo_preprocessing():
         beat_idx = int(beat_time * fs)
         if beat_idx < len(ecg) - 100:
             # Simplified PQRST complex
-            beat = signal.gaussian(100, 10)
+            beat = gaussian(100, 10)
             ecg[beat_idx:beat_idx+100] += beat
     
     # Add noise

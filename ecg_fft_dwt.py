@@ -14,6 +14,7 @@ import numpy as np
 import pywt
 import matplotlib.pyplot as plt
 from typing import Tuple, List
+from scipy.signal.windows import gaussian
 import time
 
 
@@ -556,7 +557,7 @@ def demo_frequency_analysis():
     for beat_time in np.arange(0.5, duration, beat_interval):
         beat_idx = int(beat_time * fs)
         if beat_idx < len(ecg) - 100:
-            beat = signal.gaussian(100, 10)
+            beat = gaussian(100, 10)
             ecg[beat_idx:beat_idx+100] += beat
     
     # Add some noise
