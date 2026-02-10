@@ -82,10 +82,10 @@ venv.bak/
 data/
 outputs/
 figures/
-*.png
-*.jpg
-*.jpeg
-*.pdf
+
+# Allow examples directory
+!examples/
+!examples/*.png
 
 # OS specific
 .DS_Store
